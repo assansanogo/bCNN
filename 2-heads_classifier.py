@@ -31,7 +31,7 @@ def create_baseline():
     model_a = Model(inputs=a, outputs=b)
 
     c = Input(shape=(latent_dim,), name='z_sampling')
-    d = Concatenate([model_a.output, c])
+    d = Concatenate()([model_a.output, c])
     e = Dense(1, kernel_initializer='normal', activation='sigmoid')(d)
 
     model_a = Model(inputs=[model_a.output, c], outputs=e)
