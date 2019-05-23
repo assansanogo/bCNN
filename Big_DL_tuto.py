@@ -36,8 +36,7 @@ def main():
 
     get_dataset(sc, datum)
 
-def get_model():
-    class_num = 10
+def get_model(class_num =10):
     # Initialize a sequential container
     model = Sequential()
     # encoder
