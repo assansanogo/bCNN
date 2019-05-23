@@ -22,6 +22,7 @@ def create_baseline():
     model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
     # Compile model. We use the the logarithmic loss function, and the Adam gradient optimizer.
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model.summary)
     return model
 
 def prepare_model():
@@ -30,20 +31,18 @@ def prepare_model():
 
     image_size = x_train.shape[1]
     original_dim = image_size * image_size
-    x_train = np.reshape(x_train, [-1, original_dim])©©©
+    x_train = np.reshape(x_train, [-1, original_dim])
     x_test = np.reshape(x_test, [-1, original_dim])
     x_train = x_train.astype('float32') / 255
     x_test = x_test.astype('float32') / 255
 
-    # network parameters
-    input_shape = (original_dim,)
+    return([x_train, x_test])
 
 
 def main():
     prepare_model()
-    create_baseline()
-
-
+    model_A = create_baseline()
+    print(model_A.summary())
 
 if __name__=='__main__':
     main()

@@ -190,7 +190,7 @@ if __name__ == '__main__':
     vae.summary()
 
     plot_model(vae,
-               to_file=plot_output_path,
+               to_file=os.path.join(os.path.join(plot_output_path,"vae.png")),
                show_shapes=True)
 
     if args.weights:
