@@ -1,5 +1,5 @@
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 
 import pandas
 from bigdl.dataset import mnist
@@ -21,6 +21,9 @@ def main():
     print train_labels.shape
     print test_images.shape
     print test_labels.shape
+
+
+#def get_dataset():
 
 
 
