@@ -54,7 +54,7 @@ def plot_results(models,
 
     encoder, decoder = models
     x_test, y_test = data
-    os.makedirs(model_name, exist_ok=True)
+    os.makedirs(model_name)
 
     filename = os.path.join(model_name, "vae_mean.png")
     # display a 2D plot of the digit classes in the latent space
@@ -150,8 +150,11 @@ vae = Model(inputs, outputs, name='vae_mlp')
 
 if __name__ == '__main__':
 
+    plot_output_path = './outputs/plots/vae_mlp.png'
+    plot_output_model = './outputs/vae_mlp_mnist.h5'
 
-    os.chdir("./bCNN/outputs")
+
+    os.pwd = "./bCNN/outputs"
     parser = argparse.ArgumentParser()
     help_ = "Load h5 model trained weights"
     parser.add_argument("-w", "--weights", help=help_)
@@ -178,8 +181,9 @@ if __name__ == '__main__':
     vae.add_loss(vae_loss)
     vae.compile(optimizer='adam')
     vae.summary()
+
     plot_model(vae,
-               to_file='vae_mlp.png',
+               to_file=plot_output_path,
                show_shapes=True)
 
     if args.weights:
@@ -191,7 +195,7 @@ if __name__ == '__main__':
                 batch_size=batch_size,
                 validation_data=(x_test, None))
 
-        vae.save_weights('./outputs/vae_mlp_mnist.h5')
+        vae.save_weights(plot_output_model)
 
     plot_results(models,
                  data,
