@@ -26,25 +26,30 @@ def create_baseline():
     #branch(A)
     latent_dim =2
     a = Input(shape=(28,28))
-    b = Dense(10, input_shape=(28, 28), kernel_initializer='normal', activation='relu')(a)
+    b = Dense(10, kernel_initializer='normal', activation='relu')(a)
     b = Flatten()(b)
     b = Reshape((2,-1))(b)
+
     model_a = Model(inputs=a, outputs=b)
 
+    #branch(B)
     c = Input(shape=(latent_dim,), name='z_sampling')
-    c = Reshape((2,-1))(c)
+    d = Reshape((2,-1))(c)
+    model_b = Model(inputs=c, outputs=d)
 
-    d = Concatenate(axis=-1)([model_a.output, c])
-    e = Dense(1, kernel_initializer='normal', activation='sigmoid')(d)
 
-    model_a = Model(inputs=[model_a.output, c], outputs=e)
+    # Together(A+B)
+    e = Concatenate(axis=-1)([model_a.output, model_b.output])
+    f = Dense(1, kernel_initializer='normal', activation='sigmoid')(e)
+
+    model_c = Model(inputs=[model_a.input,model_b.input], outputs=f)
 
 
     # Compile model. We use the the logarithmic loss function, and the Adam gradient optimizer.
-    model_a.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-    print(model_a)
+    model_c.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    print(model_c)
 
-    return model_a
+    return model_c
 
 def prepare_model():
     # MNIST dataset
