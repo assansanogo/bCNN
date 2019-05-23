@@ -46,6 +46,8 @@ def get_dataset(sc, datum):
                                                                   Sample.from_ndarray(
                                                                       (features - training_mean) / training_std,
                                                                       label + 1))
+
+    rdd_train_sample.eval(0)
     rdd_test_sample = rdd_test_images.zip(rdd_test_labels).map(lambda (features, label):
                                                                Sample.from_ndarray(
                                                                    (features - training_mean) / training_std,
