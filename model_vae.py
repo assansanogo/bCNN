@@ -150,7 +150,7 @@ vae = Model(inputs, outputs, name='vae_mlp')
 
 if __name__ == '__main__':
 
-    plot_output_path = './outputs/plots/vae_mlp.png'
+    plot_output_path = './outputs/plots/'
     plot_output_model = './outputs/vae_mlp_mnist.h5'
 
     paths = [plot_output_path, plot_output_model]
