@@ -35,8 +35,10 @@ def get_dataset(sc, datum):
 
     training_mean = np.mean(train_images)
     training_std = np.std(train_images)
+
     rdd_train_images = sc.parallelize(train_images)
     rdd_train_labels = sc.parallelize(train_labels)
+
     rdd_test_images = sc.parallelize(test_images)
     rdd_test_labels = sc.parallelize(test_labels)
 
