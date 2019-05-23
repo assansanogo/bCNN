@@ -153,8 +153,15 @@ if __name__ == '__main__':
     plot_output_path = './outputs/plots/vae_mlp.png'
     plot_output_model = './outputs/vae_mlp_mnist.h5'
 
+    paths = [plot_output_path, plot_output_model]
 
-    os.pwd = "./bCNN/outputs"
+    for el in paths:
+        try:
+            os.makedirs(el)
+        except:
+            pass
+
+
     parser = argparse.ArgumentParser()
     help_ = "Load h5 model trained weights"
     parser.add_argument("-w", "--weights", help=help_)
